@@ -130,9 +130,10 @@ namespace Iris.Web.Areas.Product.Controllers
             }
             else
             {
+                ApplicationDbContext Db = new ApplicationDbContext();
                 product.Title = productModel.Name;
                 product.PostedDate = DateTime.Now;
-                product.PostedByUserId = 1;
+                product.PostedByUserId = Db.Users.FirstOrDefault().Id;
                 await _productService.AddProduct(product);
                 TempData["message"] = "کالای جدید با موفقیت ثبت شد";
             }
